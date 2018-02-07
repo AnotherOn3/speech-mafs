@@ -1,0 +1,23 @@
+{
+  "name": "speech-mafs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnotherOn3/speech-mafs.git"
+  },
+  "author": "Another-One",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnotherOn3/speech-mafs/issues"
+  },
+  "homepage": "https://github.com/AnotherOn3/speech-mafs#readme",
+  "dependencies": {
+    "watson-developer-cloud": "^3.0.6"
+  }
+}
