@@ -30,7 +30,7 @@ if (process.env.VCAP_SERVICES) {
 }
 
 app.use(express.static(__dirname + '/static'));
-app.use(cors());
+app.use(cors({ origin: 'https://quick-maths-calculator.herokuapp.com/' }));
 
 // token endpoints
 // **Warning**: these endpoints should probably be guarded with additional authentication & authorization for production use
@@ -45,12 +45,12 @@ var sttAuthService = new watson.AuthorizationV1(
     vcapServices.getCredentials('speech_to_text'), // pulls credentials from environment in bluemix, otherwise returns {}
   ),
 );
-app.use('/api/speech-to-text/token', function(req, res) {
+app.use('/api/speech-to-text/token', function (req, res) {
   sttAuthService.getToken(
     {
       url: watson.SpeechToTextV1.URL,
     },
-    function(err, token) {
+    function (err, token) {
       if (err) {
         console.log('Error retrieving token: ', err);
         res.status(500).send('Error retrieving token');
@@ -62,7 +62,7 @@ app.use('/api/speech-to-text/token', function(req, res) {
 });
 
 const port = process.env.PORT || process.env.VCAP_APP_PORT || 3002;
-app.listen(port, function() {
+app.listen(port, function () {
   console.log(
     'Example IBM Watson Speech JS SDK client app & token server live at http://localhost:%s/',
     port,
@@ -82,7 +82,7 @@ if (!process.env.VCAP_SERVICES) {
     key: fs.readFileSync(__dirname + '/keys/localhost.pem'),
     cert: fs.readFileSync(__dirname + '/keys/localhost.cert'),
   };
-  https.createServer(options, app).listen(HTTPS_PORT, function() {
+  https.createServer(options, app).listen(HTTPS_PORT, function () {
     console.log('Secure server live at https://localhost:%s/', HTTPS_PORT);
   });
 }
